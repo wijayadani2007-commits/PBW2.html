@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 - Web Biodata Diri | Bonifasius Dani Wijaya</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           1. CSS RESET (Aspek: Reset Margin, Padding, Box-Sizing)
+           ========================================================= */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* =========================================================
+           2. VARIABEL & SELECTOR DASAR (Aspek: Selector body, font, dll)
+           ========================================================= */
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            /* Linear Gradient */
+            --gradient-brand: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+            --gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+            /* Box Shadow */
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 20px 35px -5px rgba(79, 70, 229, 0.35);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =========================================================
+           3. NAVBAR (Aspek: Flexbox, Selector nav a, Transition, Hover, Transform)
+           ========================================================= */
+        .navbar-container {
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex; /* Flexbox */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            background: var(--gradient-brand); /* Linear Gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex; /* Flexbox */
+            gap: 24px;
+        }
+
+        /* Selector dasar: nav a */
+        nav a {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease; /* Transition */
+        }
+
+        /* Hover Effect & Transform */
+        nav a:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px); /* Transform */
+        }
+
+        /* =========================================================
+           4. HERO SECTION (Aspek: Flexbox, Linear Gradient, Box Shadow)
+           ========================================================= */
+        .main-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 24px 60px;
+        }
+
+        .hero-section {
+            display: flex; /* Flexbox */
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 50px 0;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(79, 70, 229, 0.4);
+            border-radius: 50px;
+            color: var(--primary-light);
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+
+        .hero-title span {
+            background: var(--gradient-brand); /* Linear Gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            max-width: 520px;
+        }
+
+        .hero-cta {
+            display: flex; /* Flexbox */
+            gap: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Transition */
+        }
+
+        .btn-primary {
+            background: var(--gradient-brand); /* Linear Gradient */
+            color: #fff;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.5); /* Box Shadow */
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02); /* Transform & Hover */
+            box-shadow: 0 15px 25px -5px rgba(236, 72, 153, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-light);
+            transform: translateY(-3px); /* Transform */
+        }
+
+        .hero-image-wrapper {
+            flex-shrink: 0;
+        }
+
+        .foto-frame {
+            width: 240px;
+            height: 240px;
+            border-radius: 28px;
+            padding: 5px;
+            background: var(--gradient-brand); /* Linear Gradient */
+            box-shadow: var(--shadow-soft); /* Box Shadow */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .foto-frame:hover {
+            transform: translateY(-6px) rotate(1deg); /* Transform & Hover */
+            box-shadow: var(--shadow-hover);
+        }
+
+        .foto-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 23px;
+            display: block;
+            background-color: var(--card-bg);
+        }
+
+        /* =========================================================
+           5. SECTION & CARD (Aspek: Selector .card, Box Shadow, Transition)
+           ========================================================= */
+        .section-container {
+            padding: 35px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 45px;
+            height: 4px;
+            border-radius: 4px;
+            background: var(--gradient-brand);
+            margin-top: 8px;
+            margin-bottom: 22px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            margin-top: -14px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        /* Selector dasar: .card */
+        .card {
+            background: var(--gradient-card);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-soft); /* Box Shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transition */
+        }
+
+        .card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: var(--shadow-hover); /* Hover Effect */
+        }
+
+        /* =========================================================
+           6. GRID LAYOUT (Aspek: Grid, Hover, Transform)
+           ========================================================= */
+        .card-header {
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Biodata Grid */
+        .biodata-grid {
+            display: grid; /* Grid */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 16px 20px;
+            border-radius: 14px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px); /* Transform */
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-item .label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .info-item .value {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .info-item .quote {
+            font-style: italic;
+            color: #e2e8f0;
+        }
+
+        /* Grid Cards untuk Langkah Harian & Hobi */
+        .grid-cards {
+            display: grid; /* Grid */
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-cards.two-columns {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px); /* Transform & Hover Effect */
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           7. FOOTER (Aspek: Flexbox)
+           ========================================================= */
+        .footer {
+            background-color: #0b1120;
+            border-top: 1px solid var(--card-border);
+            padding: 24px;
+            display: flex; /* Flexbox */
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* =========================================================
+           8. RESPONSIVE DESIGN (Aspek: Media Query)
+           ========================================================= */
+        /* Layar Tablet (<= 868px) */
+        @media screen and (max-width: 868px) {
+            .hero-section {
+                flex-direction: column-reverse; /* Flexbox Direction */
+                text-align: center;
+                gap: 30px;
+                padding: 30px 0;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 24px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .foto-frame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .grid-cards {
+                grid-template-columns: repeat(2, 1fr); /* Grid responsive */
+            }
+        }
+
+        /* Layar Smartphone (<= 600px) */
+        @media screen and (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+                padding: 4px 8px;
+            }
+
+            .hero-title {
+                font-size: 1.85rem;
+            }
+
+            .biodata-grid {
+                grid-template-columns: 1fr; /* Jadi 1 Kolom */
+            }
+
+            .grid-cards,
+            .grid-cards.two-columns {
+                grid-template-columns: 1fr; /* Jadi 1 Kolom */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <span>BDW</span>.Bio
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Beranda</a></li>
+                <li><a href="#biodata">Biodata</a></li>
+                <li><a href="#aktivitas">Langkah Harian</a></li>
+                <li><a href="#hobi">Hobi & Minat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-wrapper">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <span class="badge">Tugas 2 • Pemrograman Web</span>
+                <h1 class="hero-title">Halo, Saya <span>Bonifasius Dani Wijaya</span></h1>
+                <p class="hero-subtitle">Mahasiswa yang gemar eksplorasi teknologi, mengulik baris kode, dan menikmati setiap langkah keseharian dengan santai.</p>
+                <div class="hero-cta">
+                    <a href="#biodata" class="btn btn-primary">Lihat Profil Lengkap</a>
+                    <a href="#aktivitas" class="btn btn-outline">Langkah Harian</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="foto-frame">
+                    <img src="c:\Users\User\Downloads\WhatsApp Image 2026-09-14 at 08.29.57.jpeg" alt="Foto Bonifasius Dani Wijaya">
+                </div>
+            </div>
+        </section>
+
+        <!-- Biodata Section -->
+        <section id="biodata" class="section-container">
+            <h2 class="section-title">Informasi Pribadi</h2>
+            <div class="card biodata-card">
+                <div class="card-header">
+                    <h3>Data Diri Pokok</h3>
+                    <p>Rincian profil dan identitas ringkas</p>
+                </div>
+                <div class="biodata-grid">
+                    <div class="info-item">
+                        <span class="label">Nama Lengkap</span>
+                        <p class="value">Bonifasius Dani Wijaya</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Panggilan</span>
+                        <p class="value">Dani / Boni</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Langkah Harian</span>
+                        <p class="value">Pacaran, Mbajing, Ngoding</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Hobi Utama</span>
+                        <p class="value">Bermain Game & Membaca Buku</p>
+                    </div>
+                    <div class="info-item full-width">
+                        <span class="label">Cita-cita & Motto</span>
+                        <p class="value quote">"Hidup tenang tanpa beban, selesaikan error tanpa drama."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid Cards Section: Langkah Harian -->
+        <section id="aktivitas" class="section-container">
+            <h2 class="section-title">Langkah Harian</h2>
+            <p class="section-desc">Ritme rutinitas dan fokus aktivitas yang dijalani sehari-hari.</p>
+            
+            <div class="grid-cards">
+                <div class="card feature-card">
+                    <div class="card-icon">❤️</div>
+                    <h4>Pacaran</h4>
+                    <p>Menjaga hubungan, berbagi cerita, dan meluangkan waktu bersama pasangan sebagai pendukung semangat.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">☕</div>
+                    <h4>Mbajing</h4>
+                    <p>Nongkrong santai, bertukar pikiran bersama kawan, dan rehat sejenak dari hiruk-pikuk aktivitas.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">💻</div>
+                    <h4>Ngoding</h4>
+                    <p>Mengeksplorasi kode, menyelesaikan tugas kuliah pemrograman web, serta membangun solusi digital.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobi & Minat Section -->
+        <section id="hobi" class="section-container">
+            <h2 class="section-title">Hobi & Kegemaran</h2>
+            <div class="grid-cards two-columns">
+                <div class="card feature-card">
+                    <div class="card-icon">🎮</div>
+                    <h4>Bermain Game</h4>
+                    <p>Mengasah strategi permainan, refleks, dan sarana refreshing setelah sesi coding yang panjang.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">📚</div>
+                    <h4>Membaca Buku</h4>
+                    <p>Menambah wawasan dan perspektif baru melalui bacaan menarik untuk menjaga pikiran tetap segar.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Bonifasius Dani Wijaya. Dibuat untuk Tugas 2 - Desain Web & CSS Layouting.</p>
+    </footer>
+
+</body>
+</html>
