@@ -1,71 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Biodata Diri</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        
-        .header {
-            background-color: #aed9e0;
-            text-align: center;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between; 
-            align-items: flex-start;       
-            padding: 20px;
-            max-width: 900px;              
-            margin: 0 auto;
-        }
-
-        
-        .biodata-text {
-            flex: 1;
-            line-height: 1.8;
-            font-size: 16px;
-        }
-
-        
-        .biodata-foto img {
-            width: 150px;                 
-            height: auto;
-            border-radius: 4px;           
-            margin-left: 20px;            
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Diri - Bonifasius Dani Wijaya</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="header">
-        Biodata Diri
-    </div>
+    <header>
+        <h1>Biodata Diri</h1>
+    </header>
 
-    <div class="container">
-        
-        <div class="biodata-text">
-            <p><strong>Nama :</strong> Bonifasius Dani Wijaya</p>
-            <p><strong>Langkah Harian :</strong> Pacaran, Mbajing, Ngoding</p>
-            <p><strong>Hobi :</strong> Bermain Game, Membaca Buku</p>
-            <p><strong>Cita-cita :</strong> Hidup tenang tanpa beban</p>
-        </div>
+    <main>
+        <section>
+            <!-- Foto Profil (Ukuran sudah dibatasi) -->
+            <figure>
+                <img src="c:\Users\User\Downloads\WhatsApp Image 2026-09-14 at 08.29.57.jpeg" alt="Foto Profil Bonifasius Dani Wijaya" width="180" height="auto">
+            </figure>
 
-        
-        <div class="biodata-foto">
-            <img src="c:\Users\User\Downloads\WhatsApp Image 2026-09-14 at 08.29.57.jpeg" alt="Foto Profil">
-        </div>
-    </div>
-<script src="scrip.js"></script>
+            <!-- Informasi Biodata -->
+            <article>
+                <h2>Bonifasius Dani Wijaya</h2>
+                
+                <dl>
+                    <dt><strong>Langkah Harian:</strong></dt>
+                    <dd>Pacaran, Mbajing, Ngoding</dd>
+                    <br>
+
+                    <dt><strong>Hobi:</strong></dt>
+                    <dd>Bermain Game, Membaca Buku</dd>
+                    <br>
+
+                    <dt><strong>Cita-cita:</strong></dt>
+                    <dd>Hidup tenang tanpa beban</dd>
+                    <br>
+
+                    <dt><strong>Email:</strong></dt>
+                    <dd>
+                        <a href="mailto:wijayadani2007@gmail.com">
+                            wijayadani2007@gmail.com
+                        </a>
+                    </dd>
+                    <br>
+
+                    <dt><strong>Media Sosial:</strong></dt>
+                    <dd>
+                        <a href="https://www.tiktok.com/@_bdaniw?_t=8fA1tGT7jhI&_r=1" target="_blank" rel="noopener noreferrer">
+                            TikTok: @_bdaniw
+                        </a>
+                    </dd>
+                </dl>
+            </article>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
-        
-           
